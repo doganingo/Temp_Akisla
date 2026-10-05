@@ -1,0 +1,18 @@
+# Gizli bilgiler: DB şifresi repoya girmez
+api/config.php
+
+# Loglar
+*.log
+
+# Editör / işletim sistemi dosyaları
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Claude Code yerel ayarları (PC'ye özel yollar)
+.claude/
+
+# Yükleme paketi (kaynaktan üretilir)
+deploy.zip
+deploy/
