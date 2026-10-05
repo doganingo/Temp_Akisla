@@ -1,0 +1,6 @@
+# api/ altında yalnızca submit.php ve slots.php dışarıdan çağrılabilir.
+# config.php, db.php ve validate.php doğrudan açılamaz (ek güvenlik katmanı).
+<FilesMatch "^(?!(submit|slots)\.php$).*\.php$">
+    Require all denied
+</FilesMatch>
+Options -Indexes

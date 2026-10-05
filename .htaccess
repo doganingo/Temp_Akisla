@@ -1,0 +1,27 @@
+# Tüm istekleri HTTPS'e yönlendir (form verisi şifresiz gitmesin)
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+Options -Indexes
+
+# HTML/CSS/JS yanıtlarına charset=utf-8 ekle (Türkçe karakterler her istemcide doğru okunsun)
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .css .js
+
+# Tarayıcı güvenlik başlıkları
+<IfModule mod_headers.c>
+    # Sayfa başka sitelerde iframe içine alınamaz (clickjacking)
+    Header always set X-Frame-Options "DENY"
+    # Tarayıcı dosya türünü tahmin etmez
+    Header always set X-Content-Type-Options "nosniff"
+    # Başka sitelere giden bağlantılarda tam URL gönderilmez
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    # Tarayıcı bu siteye 1 yıl boyunca yalnızca HTTPS ile bağlanır
+    Header always set Strict-Transport-Security "max-age=31536000"
+    # Yalnızca kendi alan adımızdan script/stil/istek; satır içi script çalışmaz (XSS'e karşı ek katman)
+    Header always set Content-Security-Policy "default-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    # Sunucu yazılım sürümü açıklanmaz
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+</IfModule>
