@@ -1,0 +1,244 @@
+/* Renkler: metin/arka plan kontrastı WCAG AA (4.5:1) üzerinde seçildi. */
+:root {
+  --text: #1a1f2b;
+  --muted: #4a5263;
+  --bg: #ffffff;
+  --bg-alt: #f3f5f9;
+  --primary: #1d4ed8;
+  --primary-dark: #1e3a8a;
+  --primary-soft: #e8eefc;
+  --line: #d9dee7;
+  --border: #6b7280;
+  --error: #b42318;
+  --error-bg: #fef3f2;
+  --success: #067647;
+  --success-bg: #ecfdf3;
+  --focus: #f59e0b;
+  --radius: 10px;
+  --shadow: 0 6px 24px rgba(26, 31, 43, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 0.75rem; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.1rem; }
+p { margin: 0 0 1rem; }
+
+.container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+.narrow { max-width: 760px; }
+
+/* Klavye kullanıcıları için belirgin odak halkası */
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.skip-link {
+  position: absolute; left: 16px; top: -100px;
+  background: var(--text); color: #fff; padding: 0.5rem 1rem; z-index: 20;
+}
+.skip-link:focus { top: 8px; }
+
+/* ---------- Üst bar ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+.logo {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 1.25rem; color: var(--primary-dark); text-decoration: none;
+}
+.logo-mark {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--primary) 0 50%, var(--primary-dark) 50% 100%);
+}
+.main-nav { display: none; gap: 24px; margin-left: auto; }
+.main-nav a { color: var(--text); text-decoration: none; font-weight: 500; }
+.main-nav a:hover { color: var(--primary); }
+.header-inner .btn { margin-left: auto; }
+
+/* ---------- Butonlar ---------- */
+.btn {
+  display: inline-block;
+  font: inherit; font-weight: 600; text-align: center;
+  color: #fff; background: var(--primary);
+  border: 2px solid var(--primary); border-radius: var(--radius);
+  padding: 0.7rem 1.4rem;
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+.btn:disabled { opacity: 0.7; cursor: wait; }
+.btn-small { padding: 0.4rem 0.9rem; font-size: 0.95rem; }
+.btn-ghost { color: var(--primary-dark); background: transparent; }
+.btn-ghost:hover { color: #fff; }
+.btn-block { width: 100%; }
+
+/* ---------- Hero ---------- */
+.hero { padding: 48px 0 56px; background: linear-gradient(180deg, var(--primary-soft), var(--bg)); }
+.hero-grid { display: grid; gap: 40px; align-items: center; }
+.eyebrow { color: var(--primary-dark); font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.lead { font-size: 1.15rem; color: var(--muted); max-width: 36em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.5rem 0; }
+.checks { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); }
+.checks li::before { content: "✓"; color: var(--success); font-weight: 700; margin-right: 6px; }
+
+/* Örnek akış kartı (yalnızca HTML/CSS) */
+.flow-card {
+  margin: 0; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 16px; padding: 24px; box-shadow: var(--shadow);
+}
+.flow-title { font-weight: 700; margin-bottom: 16px; }
+.flow { list-style: none; margin: 0; padding: 0; }
+.flow li { position: relative; display: flex; gap: 14px; align-items: flex-start; padding-bottom: 20px; }
+.flow li:last-child { padding-bottom: 0; }
+/* Adımları birleştiren dikey çizgi */
+.flow li:not(:last-child)::after {
+  content: ""; position: absolute; left: 15px; top: 34px; bottom: 4px;
+  width: 2px; background: var(--line);
+}
+.flow small { display: block; color: var(--muted); }
+.flow-dot {
+  flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--primary-soft); color: var(--primary-dark); font-weight: 700;
+}
+.flow-dot-done { background: var(--success-bg); color: var(--success); }
+
+/* ---------- Bölümler ---------- */
+.section { padding: 56px 0; }
+section[id] { scroll-margin-top: 64px; } /* yapışkan üst bar başlığı kapatmasın */
+.section-alt { background: var(--bg-alt); }
+.section-lead { color: var(--muted); margin-bottom: 2rem; }
+
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.steps li { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.steps p { margin: 0; color: var(--muted); }
+.step-no {
+  display: inline-grid; place-items: center; width: 36px; height: 36px; margin-bottom: 12px;
+  border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700;
+}
+
+.cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.card p { margin: 0; color: var(--muted); }
+.icon {
+  width: 40px; height: 40px; padding: 8px; margin-bottom: 12px;
+  border-radius: 10px; background: var(--primary-soft);
+  fill: none; stroke: var(--primary-dark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+.examples { display: grid; gap: 16px; }
+.example { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.example dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; }
+.example dt { font-weight: 700; font-size: 0.85rem; padding: 2px 8px; border-radius: 6px; align-self: start; }
+.example dt:nth-of-type(1) { background: var(--error-bg); color: var(--error); }
+.example dt:nth-of-type(2) { background: var(--success-bg); color: var(--success); }
+.example dd { margin: 0; color: var(--muted); }
+
+/* ---------- Form bölümü ---------- */
+.form-grid { display: grid; gap: 32px; align-items: start; }
+.form-intro h3 { margin-top: 1.5rem; }
+.next-steps { padding-left: 1.25rem; margin: 0 0 1rem; color: var(--muted); }
+.next-steps li { margin-bottom: 0.4rem; }
+.note { font-size: 0.95rem; color: var(--muted); }
+
+.form-card {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
+  padding: 24px 20px; box-shadow: var(--shadow);
+}
+.form-required { color: var(--muted); font-size: 0.95rem; }
+
+.field { margin-bottom: 1.25rem; }
+label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+
+input, select, textarea {
+  width: 100%;
+  font: inherit; color: var(--text);
+  background: #fff;
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+}
+textarea { resize: vertical; }
+
+[aria-invalid="true"] { border-color: var(--error); border-width: 2px; }
+
+.hint { font-size: 0.9rem; color: var(--muted); margin: 0.3rem 0 0; }
+.field-error { color: var(--error); font-size: 0.95rem; font-weight: 600; margin: 0.3rem 0 0; }
+.field-error:empty { display: none; }
+
+/* Ön görüşme seçimi: radio butonlar "çip" görünümünde */
+.meeting { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; margin: 0 0 1.25rem; min-width: 0; }
+.meeting legend { font-weight: 600; padding: 0 6px; }
+.optional { font-weight: 400; color: var(--muted); }
+.meeting.is-invalid { border-color: var(--error); border-width: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chips-label { font-weight: 600; margin: 16px 0 0; }
+.chip { position: relative; }
+/* Radio görünmez ama erişilebilir kalır (klavye ve ekran okuyucu onu kullanır) */
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip span {
+  display: block; min-width: 76px; text-align: center; line-height: 1.3;
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: #fff; cursor: pointer; font-size: 0.95rem;
+}
+.chip small { display: block; color: var(--muted); font-size: 0.8rem; }
+.chip input:checked + span { background: var(--primary); border-color: var(--primary); color: #fff; }
+.chip input:checked + span small { color: #fff; }
+.chip input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+.chip input:disabled + span { background: var(--bg-alt); color: #6b7280; border-style: dashed; cursor: not-allowed; text-decoration: line-through; }
+.link-btn {
+  margin-top: 12px; padding: 0; border: 0; background: none;
+  font: inherit; font-size: 0.95rem; color: var(--primary); text-decoration: underline; cursor: pointer;
+}
+
+/* Honeypot alanı ekran dışında; display:none bazı botlar tarafından atlanır */
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-status { margin-top: 1.25rem; border-radius: 8px; }
+.form-status:empty { display: none; }
+.form-status.is-success { padding: 1rem; color: var(--success); background: var(--success-bg); border: 1px solid var(--success); }
+.form-status.is-error { padding: 1rem; color: var(--error); background: var(--error-bg); border: 1px solid var(--error); }
+.form-status.is-pending { padding: 1rem; color: var(--muted); background: var(--bg-alt); }
+
+/* ---------- SSS ---------- */
+.faq details { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 12px; background: var(--bg); }
+.faq summary { cursor: pointer; font-weight: 600; padding: 16px 20px; }
+.faq details p { margin: 0; padding: 0 20px 16px; color: var(--muted); }
+
+/* ---------- Alt bilgi ---------- */
+.site-footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+.footer-inner { display: grid; gap: 12px; }
+.site-footer p { margin: 0; }
+
+/* ---------- Tablet ---------- */
+@media (min-width: 700px) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .examples { grid-template-columns: repeat(3, 1fr); }
+  .form-card { padding: 32px; }
+  .section { padding: 72px 0; }
+}
+
+/* ---------- Masaüstü ---------- */
+@media (min-width: 960px) {
+  .main-nav { display: flex; }
+  .header-inner .btn { margin-left: 8px; }
+  .hero { padding: 88px 0 96px; }
+  .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 56px; }
+  .cards { grid-template-columns: repeat(4, 1fr); }
+  .form-grid { grid-template-columns: 0.9fr 1.1fr; gap: 56px; }
+  .footer-inner { grid-template-columns: auto 1fr; align-items: center; gap: 32px; }
+}
